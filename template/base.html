@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+   
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="POST" class="p-3 shadow">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="dob">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Add</button>
+            </form>
+            <br>
+            <br>
+        </div>
+
+        <div class="col-md-6">
+            <h4>STUDENT DETAILS</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>EMAIL</th>
+                        <th>DATE OF BIRTH</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in students %}
+                    <tr>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.dob }}</td>
+                        <td>
+                            <a class="btn btn-danger" href="{% url 'student_delete' i.id %}">Delete</a>
+                            <a class="btn btn-warning" href="{% url 'student_update' pk=i.pk %}">Update</a>
+
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+    
+</body>
+</html>
